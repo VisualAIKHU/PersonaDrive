@@ -1,5 +1,5 @@
 <div align="center">
-<img src="assets/logo.png" width="450">
+<img src="assets/logo.png" width="700">
 <h1>PersonaDrive</h1>
 <h3>Controllable Trajectory Prediction with Multi-Dimensional Driving Personas</h3>
 
