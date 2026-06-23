@@ -1,0 +1,26 @@
+_target_: navsim.agents.personadrive.personadrive_agent.PersonaDriveAgent
+_convert_: 'all'
+
+config:
+  _target_: navsim.agents.personadrive.personadrive_config.PersonaDriveConfig
+  _convert_: 'all'
+
+  trajectory_sampling:
+    _target_: nuplan.planning.simulation.trajectory.trajectory_sampling.TrajectorySampling
+    _convert_: 'all'
+    time_horizon: 4
+    interval_length: 0.5
+
+  latent: False
+
+  bert_backbone: "sentence-transformers/all-MiniLM-L6-v2"
+
+  # Hierarchical conditioning (9-persona)
+  neutral_persona_idx: 4
+  guide_weight: 1.0
+  diversity_cross_weight: 0.2
+  diversity_tau: 0.25
+  diversity_margin_alpha: 1.0
+
+checkpoint_path: null
+lr: 6e-4

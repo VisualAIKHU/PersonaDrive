@@ -1,0 +1,23 @@
+hydra:
+  run:
+    dir: ${output_dir}
+  output_subdir: ${output_dir}/code/hydra           # Store hydra's config breakdown here for debugging
+  searchpath:                                       # Only <exp_dir> in these paths are discoverable
+    - pkg://navsim.planning.script.config.common 
+  job:
+    chdir: False
+
+defaults:
+  - default_common
+  - default_evaluation
+  - default_scoring_parameters
+  - agent: constant_velocity_agent
+  - _self_
+  - override train_test_split: navtest
+
+metric_cache_path: ${oc.env:NAVSIM_EXP_ROOT}/metric_cache # path to metric cache
+per_scene_dir: ${oc.env:NAVSIM_EXP_ROOT}/personadrive/per_scene  # path to per_scene JSONs (PCT dataset)
+driving_purpose: UM_CM  # UH_CL / UH_CM / UH_CH / UM_CL / UM_CM / UM_CH / UL_CL / UL_CM / UL_CH / all
+vis: false              # Save 3x3 persona grid when distance-ordering conditions are met
+vis_dir: vis_results    # Output directory for visualizations
+max_scenes: -1          # Limit number of scenes to evaluate (-1 = all)
