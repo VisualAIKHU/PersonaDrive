@@ -37,7 +37,8 @@ _________________
 
 ## Abstract
 
-Although recent trajectory prediction and end-to-end planning methods improve robustness in urban environments, they still lack meaningful controllability. Existing benchmarks either provide no persona-conditioned annotations or support only a single urgency spectrum (_i.e._, emergency, normal, relaxed), which cannot distinguish personas that share the same urgency level but require different driving dynamics. To address this, we propose (_i_) the Persona-Conditioned Trajectory (PCT) dataset, which decomposes driving personas along two axes—Temporal Urgency and Ride Comfort—and combines three levels of each to form a grid of nine personas, each paired with natural-language descriptions and trajectories, and (_ii_) PersonaDrive, a framework that can learn driving personas from language and can generate persona-specific trajectories. PersonaDrive incorporates Persona-Conditioned Anchor Transform (PCAT), which hierarchically reshapes anchors along both axes, and Persona-Conditioned Multi-Modal Fusion (PCMF) for BEV-level persona fusion. Training is supervised by a Hierarchical Guide Loss enforcing axis-aligned physical orderings and an Axis-Decomposed Diversity Loss preventing diagonal mode collapse. Experimental results show that PersonaDrive consistently outperforms strong baselines across all nine personas, with the largest gains in multi-dimensional scenarios where personas share one axis but differ along the other.
+Although recent trajectory prediction and end-to-end planning methods improve robustness in urban environments, they still lack meaningful controllability. Existing benchmarks either provide no persona-conditioned annotations or support only a single urgency spectrum (_i.e._, emergency, normal, relaxed), which cannot distinguish personas that share the same urgency level but require different driving dynamics. To address this, we propose (_i_) the Persona-Conditioned Trajectory (PCT) dataset, which decomposes driving personas along two axes—Temporal Urgency and Ride Comfort—and combines three levels of each to form a grid of nine personas, each paired with natural-language descriptions and trajectories, and (_ii_) PersonaDrive, a framework that can learn driving personas from language and can generate persona-specific trajectories. PersonaDrive incorporates Persona-Conditioned Anchor Transform (PCAT), which hierarchically reshapes anchors along both axes, and Persona-Conditioned Multi-Modal Fusion (PCMF) for BEV-level persona fusion. Training is supervised by a Hierarchical Guide Loss enforcing axis-aligned physical orderings and an Axis-Decomposed Diversity Loss preventing diagonal mode collapse. Experimental results show that PersonaDrive consistently improves over the compared baselines across all nine personas, with the largest gains in multi-dimensional scenarios where personas share one axis but differ along the other.
+
 <div align=center> <img src="assets/architecture.png" width="950"/> </div>
 
 ## Qualitative Results of PersonaDrive on PCT Dataset
@@ -49,8 +50,8 @@ Although recent trajectory prediction and end-to-end planning methods improve ro
 Follow the steps below to set up the environment and run the code.
 
 1. [Getting started from NAVSIM environment preparation](https://github.com/autonomousvision/navsim?tab=readme-ov-file#getting-started-)
-2. [Preparation of PCT Dataset](docs/download_PCT_dataset.md)
-3. [Preparation of PersonaDrive environment](docs/setup_env.md)
+2. [Preparation of PersonaDrive environment](docs/setup_env.md)
+3. [Preparation of PCT Dataset](docs/download_PCT_dataset.md)
 4. [Training and Evaluation](docs/train_eval.md)
 
 ## Checkpoint & PCT Dataset Download
