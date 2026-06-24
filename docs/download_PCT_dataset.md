@@ -59,7 +59,7 @@ $NAVSIM_EXP_ROOT
 ## 2. Download and unpack the PCT annotations
 
 Download the PCT dataset archive from
-[PCT Dataset (Google Drive)](https://drive.google.com/file/d/17NUcrvEfkmmEjQF1D0mtBMHCYsjqbsec/view?usp=drive_link).
+[PCT Dataset (Google Drive)](https://drive.google.com/file/d/1bRSiRy8CWpTWpo9abO_-L5RLjDRvSrhs/view?usp=drive_link).
 The instructions below assume you have placed `PersonaDrive_dataset.tar.gz` at the
 repository root. Unpack it under `$NAVSIM_EXP_ROOT`:
 

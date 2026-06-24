@@ -58,7 +58,7 @@ Follow the steps below to set up the environment and run the code.
 
 We release our best-performing and pre-trained baseline model checkpoint and PCT Dataset. 
 
-You can download this checkpoint at [Checkpoint](https://drive.google.com/file/d/1Aq_xFWfVGAi6W8m7NCnV6ZcWJzqWNPWz/view?usp=drive_link) and PCT Dataset at [PCT Dataset](https://drive.google.com/file/d/17NUcrvEfkmmEjQF1D0mtBMHCYsjqbsec/view?usp=drive_link).
+You can download this checkpoint at [Checkpoint](https://drive.google.com/file/d/1Aq_xFWfVGAi6W8m7NCnV6ZcWJzqWNPWz/view?usp=drive_link) and PCT Dataset at [PCT Dataset](https://drive.google.com/file/d/1bRSiRy8CWpTWpo9abO_-L5RLjDRvSrhs/view?usp=drive_link).
 
 
 ## Results
