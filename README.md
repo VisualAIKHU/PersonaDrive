@@ -21,7 +21,7 @@ Accepted to ECCV 2026!
 
 <!-- [![Paper](https://img.shields.io/badge/PersonaDrive-paper-red?logo=arXiv)]()&nbsp; -->
 [![Checkpoint](https://img.shields.io/badge/Checkpoint-Google%20Drive-blue?logo=googledrive&logoColor=white)](https://drive.google.com/file/d/1Aq_xFWfVGAi6W8m7NCnV6ZcWJzqWNPWz/view?usp=drive_link)&nbsp;
-[![Dataset](https://img.shields.io/badge/PCT_Dataset-Google%20Drive-green?logo=googledrive&logoColor=white)](https://drive.google.com/file/d/1Aq_xFWfVGAi6W8m7NCnV6ZcWJzqWNPWz/view?usp=drive_link)
+[![Dataset](https://img.shields.io/badge/PCT_Dataset-Google%20Drive-green?logo=googledrive&logoColor=white)](https://drive.google.com/file/d/1bRSiRy8CWpTWpo9abO_-L5RLjDRvSrhs/view?usp=drive_link)
 </div>
 
 _________________ 
