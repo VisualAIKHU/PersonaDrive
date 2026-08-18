@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="PersonaDrive: Controllable Trajectory Prediction with Multi-Dimensional Driving Personas">
+  <meta name="description" content="PersonaDrive conditions trajectory prediction on natural-language driving personas decomposed along Temporal Urgency and Ride Comfort, with the PCT dataset of nine personas and a framework (PCAT + PCMF) that controls behavior across both axes.">
+  <meta name="keywords" content="autonomous driving, trajectory prediction, driving persona, controllable planning, multi-modal learning, NAVSIM, dataset, benchmark, computer vision">
+  <meta name="author" content="Chan Lee, Kimin Yun, Yuseok Bae, Seong Tae Kim, Jung Uk Kim">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Visual AI Lab, Kyung Hee University">
+  <meta property="og:title" content="PersonaDrive: Controllable Trajectory Prediction with Multi-Dimensional Driving Personas">
+  <meta property="og:description" content="A two-axis (Temporal Urgency × Ride Comfort) persona formulation, the PCT dataset of nine natural-language personas, and the PersonaDrive framework for persona-controllable trajectory prediction. Accepted to ECCV 2026.">
+  <meta property="og:url" content="https://github.com/VisualAIKHU/PersonaDrive">
+  <meta property="og:image" content="static/images/figure1.png">
+  <meta property="og:image:alt" content="PersonaDrive - nine driving personas across Temporal Urgency and Ride Comfort">
+  <meta property="article:published_time" content="2026-01-01T00:00:00.000Z">
+  <meta property="article:author" content="Chan Lee">
+  <meta property="article:section" content="Research">
+  <meta property="article:tag" content="autonomous driving">
+  <meta property="article:tag" content="trajectory prediction">
+
+  <!-- Additional SEO -->
+  <meta name="theme-color" content="#2563eb">
+  <meta name="msapplication-TileColor" content="#2563eb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <link rel="preconnect" href="https://documentcloud.adobe.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+
+  <title>PersonaDrive: Controllable Trajectory Prediction with Multi-Dimensional Driving Personas</title>
+
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/png" href="static/images/visualai.png">
+  <link rel="apple-touch-icon" href="static/images/visualai.png">
+
+  <!-- Critical CSS - Load synchronously -->
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <!-- Non-critical CSS - Load asynchronously -->
+
+  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+  <!-- Fallback for browsers that don't support preload -->
+  <noscript>
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+
+  <!-- Fonts - Optimized loading -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Defer non-critical JavaScript -->
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/bulma-carousel.min.js"></script>
+  <script defer src="static/js/bulma-slider.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+
+  <!-- Structured Data for Academic Papers -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "PersonaDrive: Controllable Trajectory Prediction with Multi-Dimensional Driving Personas",
+    "description": "PersonaDrive decomposes driving persona along Temporal Urgency and Ride Comfort into nine categories, introduces the PCT dataset of natural-language persona descriptions paired with trajectories, and proposes a framework (PCAT + PCMF) for persona-controllable trajectory prediction.",
+    "author": [
+      { "@type": "Person", "name": "Chan Lee", "affiliation": { "@type": "Organization", "name": "Kyung Hee University" } },
+      { "@type": "Person", "name": "Kimin Yun", "affiliation": { "@type": "Organization", "name": "ETRI" } },
+      { "@type": "Person", "name": "Yuseok Bae", "affiliation": { "@type": "Organization", "name": "ETRI" } },
+      { "@type": "Person", "name": "Seong Tae Kim", "affiliation": { "@type": "Organization", "name": "Kyung Hee University" } },
+      { "@type": "Person", "name": "Jung Uk Kim", "affiliation": { "@type": "Organization", "name": "Kyung Hee University" } }
+    ],
+    "datePublished": "2026",
+    "publisher": { "@type": "Organization", "name": "European Conference on Computer Vision (ECCV)" },
+    "url": "https://github.com/VisualAIKHU/PersonaDrive",
+    "image": "static/images/figure1.png",
+    "keywords": ["autonomous driving", "trajectory prediction", "driving persona", "controllable planning", "multi-modal learning"],
+    "isAccessibleForFree": true,
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "about": [
+      { "@type": "Thing", "name": "Autonomous Driving" },
+      { "@type": "Thing", "name": "Trajectory Prediction" }
+    ]
+  }
+  </script>
+
+  <!-- Website/Organization Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Visual AI Lab, Kyung Hee University",
+    "url": "https://visualai.khu.ac.kr/",
+    "logo": "static/images/visualai.png",
+    "sameAs": [
+      "https://github.com/VisualAIKHU"
+    ]
+  }
+  </script>
+</head>
+<body>
+
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+<main id="main-content">
+
+  <!-- Title + Abstract -->
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+
+            <h1 class="title is-1 publication-title">
+              PersonaDrive: Controllable Trajectory Prediction with Multi-Dimensional Driving Personas
+            </h1>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=GxgmfkEAAAAJ&hl=en" target="_blank">Chan Lee</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?hl=en&user=fcVfLCkAAAAJ" target="_blank">Kimin Yun</a><sup>2</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?hl=en&user=aQpHV-wAAAAJ" target="_blank">Yuseok Bae</a><sup>2</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=DEQbVOwAAAAJ&hl=en" target="_blank">Seong Tae Kim</a><sup>1,†</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://scholar.google.co.kr/citations?user=JMZ80R8AAAAJ&hl=en" target="_blank">Jung Uk Kim</a><sup>1,†</sup>
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <sup>1</sup>Kyung Hee University, Yong-in, South Korea
+              </span>
+              <span class="eql-cntrb">
+                <small><br>{cksdlakstp12, st.kim, ju.kim}@khu.ac.kr</small>
+              </span> <br>
+              <span class="author-block">
+                <sup>2</sup>ETRI, Daejeon, South Korea
+              </span>
+              <span class="eql-cntrb">
+                <small><br>{kimin.yun, baeys}@etri.re.kr</small>
+              </span>
+            </div>
+
+            <div class="publication-links" style="margin-top: 1rem;">
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2608.15230" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+
+              <span class="link-block">
+                <a href="https://github.com/VisualAIKHU/PersonaDrive" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+
+              <span class="link-block">
+                <a href="https://drive.google.com/file/d/1bRSiRy8CWpTWpo9abO_-L5RLjDRvSrhs/view?usp=drive_link" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-database"></i>
+                  </span>
+                  <span>PCT Dataset</span>
+                </a>
+              </span>
+
+              <span class="link-block">
+                <a href="https://drive.google.com/file/d/1Aq_xFWfVGAi6W8m7NCnV6ZcWJzqWNPWz/view?usp=drive_link" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-cube"></i>
+                  </span>
+                  <span>Checkpoint</span>
+                </a>
+              </span>
+            </div>
+
+            <div class="publication-venue" style="margin-top: 1.25rem;">
+              <p class="title is-4" style="margin-bottom: 0;">
+                ECCV 2026
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Abstract inside title section -->
+        <div class="columns is-centered has-text-centered" style="margin-top: 2.5rem;">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Abstract</h2>
+            <div class="content has-text-justified">
+              <p>
+                Recent trajectory prediction and end-to-end driving methods are robust but offer little control over
+                driving behavior, and existing benchmarks cover at most a single urgency spectrum. We introduce the
+                <b>Persona-Conditioned Trajectory (PCT) dataset</b>, which decomposes driving persona into two axes,
+                <b>Temporal Urgency</b> and <b>Ride Comfort</b>, and pairs each of the resulting nine personas with
+                natural-language descriptions and trajectories. We also propose <b>PersonaDrive</b>, a framework that
+                learns personas from language and generates persona-specific trajectories through a Persona-Conditioned
+                Anchor Transform (PCAT) and Persona-Conditioned Multi-Modal Fusion (PCMF), trained with a Hierarchical
+                Guide Loss and an Axis-Decomposed Diversity Loss. PersonaDrive consistently outperforms baselines
+                across all nine personas, with the largest gains in multi-dimensional scenarios.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- End Title + Abstract -->
+
+
+  <!-- Method + Results + BibTeX in one white section -->
+  <section class="section" id="method-results-bibtex">
+    <div class="container is-max-desktop">
+
+      <!-- Motivation / Introduction -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full">
+          <h2 class="title is-3">Motivation</h2>
+
+          <div class="content has-text-justified">
+            <p>
+              A single urgency spectrum (emergency / normal / relaxed) cannot tell apart personas that are equally
+              urgent but need different dynamics. A paramedic protecting a critical patient wants a smooth, jerk-free
+              ride, while a firefighter racing to a blaze accepts aggressive maneuvers. We therefore decompose persona
+              into two orthogonal axes, <b>Temporal Urgency</b> (how fast to progress) and <b>Ride Comfort</b>
+              (how smoothly), with three levels each. This yields nine personas that natural language can express
+              beyond a one-hot label.
+            </p>
+          </div>
+
+          <figure class="image" style="margin-top: 2rem;">
+            <img src="static/images/figure1.png"
+                 alt="Comparison of existing planners without persona input, one-dimensional persona planners, and PersonaDrive with a multi-dimensional (Urgency x Comfort) persona grid"
+                 loading="lazy"
+                 style="max-width: 90%; height: auto; display: block; margin-left: auto; margin-right: auto;">
+          </figure>
+          <p class="subtitle has-text-centered" style="margin-top: 0.75rem;">
+            <b>Figure 1.</b> Motivation. (a) Existing planners take no persona input and produce a single behavior.
+            (b) One-dimensional persona methods cover only a single urgency spectrum. (c) PersonaDrive conditions on a
+            multi-dimensional persona that combines Temporal Urgency and Ride Comfort into a 3&times;3 grid, generating
+            distinct, controllable trajectories from the same scene.
+          </p>
+        </div>
+      </div>
+      <!-- End Motivation -->
+
+      <!-- PCT Dataset -->
+      <div class="columns is-centered has-text-centered" style="margin-top: 4rem;">
+        <div class="column is-full">
+          <h2 class="title is-3">Persona-Conditioned Trajectory (PCT) Dataset</h2>
+
+          <div class="content has-text-justified">
+            <p>
+              Each persona is a natural-language passenger request that encodes urgency and comfort implicitly, covering
+              the full 3&times;3 grid without explicit axis labels. A <b>four-stage pipeline</b> produces nine trajectory
+              and text pairs for every scene in OpenScene. GPT-4o-mini first generates candidates, rule-based checks
+              validate them, GPT-4o then scores them as an LLM judge, and failed samples are regenerated with the
+              failure reason fed back into the prompt. Humans identify the correct persona with <b>85.7%</b> accuracy,
+              and independent re-judging with Claude and Gemini agrees strongly (&kappa; = 0.978 and 0.804).
+            </p>
+          </div>
+
+          <figure class="image" style="margin-top: 2rem;">
+            <img src="static/images/figure2.png"
+                 alt="Four-stage PCT dataset generation pipeline: candidate generation, rule-based validation, LLM-as-a-Judge, and failure-aware regeneration"
+                 loading="lazy"
+                 style="max-width: 100%; height: auto; display: block; margin-left: auto; margin-right: auto;">
+          </figure>
+          <p class="subtitle has-text-centered" style="margin-top: 0.75rem;">
+            <b>Figure 2.</b> Dataset generation pipeline. Stage 1 generates candidate trajectory and text pairs with
+            GPT-4o-mini voting. Stage 2 applies rule-based validation covering dynamic bounds, lane compliance,
+            progress ordering, and pairwise diversity. Stage 3 uses GPT-4o as an LLM judge for persona identification
+            and quality scoring. Stage 4 regenerates failed samples by injecting the failure reason into the prompt,
+            with up to three retries.
+          </p>
+
+          <figure class="image" style="margin-top: 2.5rem;">
+            <img src="static/images/figure3.png"
+                 alt="Radar-chart statistics of the PCT dataset along the urgency axis (longitudinal dynamics) and comfort axis (handling and lateral dynamics)"
+                 loading="lazy"
+                 style="max-width: 90%; height: auto; display: block; margin-left: auto; margin-right: auto;">
+          </figure>
+          <p class="subtitle has-text-centered" style="margin-top: 0.75rem;">
+            <b>Figure 3.</b> Dataset statistics. (a) Along the urgency axis, speed and travel distance grow with
+            urgency level. (b) Along the comfort axis, jerk and yaw rate shrink as comfort increases. The two axes
+            control complementary, well-separated aspects of the trajectories.
+          </p>
+        </div>
+      </div>
+      <!-- End PCT Dataset -->
+
+      <!-- Method -->
+      <div class="columns is-centered has-text-centered" style="margin-top: 4rem;">
+        <div class="column is-full">
+          <h2 class="title is-3">Method</h2>
+
+          <div class="content has-text-justified">
+            <p>
+              PersonaDrive takes camera, LiDAR, and a persona text encoded by a frozen MiniLM. <b>PCAT</b> modulates
+              the anchor bank, using an urgency scalar &alpha;<sub>u</sub> to scale travel distance and a per-timestep
+              comfort vector &alpha;<sub>c</sub> to shape the trajectory. <b>PCMF</b> then fuses BEV, ego, persona, and
+              anchor queries into persona-aware features. Two objectives supervise training on top of the
+              DiffusionDrive baseline: a <b>Hierarchical Guide Loss</b> that enforces axis-aligned orderings (higher
+              urgency means longer trajectories, and lower comfort allows higher jerk) and an <b>Axis-Decomposed
+              Diversity Loss</b> that prevents diagonal mode collapse.
+            </p>
+          </div>
+
+          <figure class="image" style="margin-top: 2rem;">
+            <img src="static/images/figure4.png"
+                 alt="Overall architecture of PersonaDrive: frozen text encoder, PCAT anchor modulation, PCMF fusion, and the trajectory decoder with hierarchical guide and axis-decomposed diversity losses"
+                 loading="lazy"
+                 style="max-width: 100%; height: auto; display: block; margin-left: auto; margin-right: auto;">
+          </figure>
+          <p class="subtitle has-text-centered" style="margin-top: 0.75rem;">
+            <b>Figure 4.</b> Overall architecture. A frozen text encoder embeds the persona request. PCAT modulates
+            the anchor bank with an urgency scalar &alpha;<sub>u</sub> and a comfort vector &alpha;<sub>c</sub> under
+            the Hierarchical Guide Loss. PCMF fuses persona, visible, and ego-status features, and the decoder is
+            trained with the Axis-Decomposed Diversity Loss (&#x1D43F;<sub>AD</sub>) over the 3&times;3 persona grid.
+          </p>
+        </div>
+      </div>
+      <!-- End Method -->
+
+      <!-- Results -->
+      <div class="columns is-centered has-text-centered" style="margin-top: 4rem;">
+        <div class="column is-full">
+          <h2 class="title is-3">Results</h2>
+
+          <div class="content has-text-justified">
+            <p>
+              On the <b>NAVSIM</b> closed-loop benchmark (all baselines share the same frozen text encoder), PersonaDrive
+              achieves the lowest ADE/FDE and the highest PDMS, winning ADE/FDE in all nine persona cells.
+            </p>
+          </div>
+
+          <!-- Main results table -->
+          <figure class="image" style="margin-top: 1rem;">
+            <img src="static/images/table1.png"
+                 alt="Main results table: PersonaDrive achieves the best average ADE (2.39), FDE (3.71), and PDMS (57.7) against ten baselines on NAVSIM"
+                 loading="lazy"
+                 style="max-width: 90%; height: auto; display: block; margin-left: auto; margin-right: auto;">
+          </figure>
+          <p class="subtitle has-text-centered" style="margin-top: 0.75rem;">
+            <b>Table 1.</b> Main results on the NAVSIM <i>navtest</i> split, averaged across all nine persona
+            categories. PersonaDrive achieves the best ADE, FDE, and PDMS among all baselines.
+          </p>
+
+          <!-- Ablation table -->
+          <figure class="image" style="margin-top: 2.5rem;">
+            <img src="static/images/table2.png"
+                 alt="Ablation table: adding PCAT, PCMF, and the axis-decomposed diversity loss progressively improves ADE, FDE, and PDMS over the baseline"
+                 loading="lazy"
+                 style="max-width: 75%; height: auto; display: block; margin-left: auto; margin-right: auto;">
+          </figure>
+          <p class="subtitle has-text-centered" style="margin-top: 0.75rem;">
+            <b>Table 2.</b> Ablation study. PCAT, PCMF, and the Axis-Decomposed Diversity Loss
+            (&#x1D43F;<sub>AD</sub>) each contribute, and the full model performs best, improving ADE from 3.93 to
+            2.39 and PDMS from 55.3 to 57.7 over the baseline.
+          </p>
+
+          <!-- Qualitative results -->
+          <h3 class="title is-4" style="margin-top: 3rem;">Qualitative Results</h3>
+          <div class="content has-text-justified">
+            <p>
+              Higher urgency yields longer trajectories, and higher comfort yields smoother motion. In each figure,
+              (a) shows the nine predicted trajectories over the 3&times;3 persona grid and (b) shows the
+              natural-language passenger request that conditioned each cell.
+            </p>
+          </div>
+
+          <figure class="image" style="margin-bottom: 2rem;">
+            <img src="static/images/figure5.png"
+                 alt="Qualitative results scene 1: nine predicted trajectories over the urgency-comfort grid with the conditioning passenger requests"
+                 loading="lazy"
+                 style="max-width: 100%; height: auto; display: block; margin-left: auto; margin-right: auto;">
+          </figure>
+          <p class="subtitle has-text-centered" style="margin-top: 0.75rem; margin-bottom: 2.5rem;">
+            <b>Figure 5.</b> Qualitative results (scene 1). Rows vary Temporal Urgency and columns vary Ride Comfort.
+          </p>
+
+          <figure class="image" style="margin-bottom: 2rem;">
+            <img src="static/images/figure6.png"
+                 alt="Qualitative results scene 2: nine predicted trajectories over the urgency-comfort grid with the conditioning passenger requests"
+                 loading="lazy"
+                 style="max-width: 100%; height: auto; display: block; margin-left: auto; margin-right: auto;">
+          </figure>
+          <p class="subtitle has-text-centered" style="margin-top: 0.75rem; margin-bottom: 2.5rem;">
+            <b>Figure 6.</b> Qualitative results (scene 2).
+          </p>
+
+          <figure class="image" style="margin-bottom: 2rem;">
+            <img src="static/images/figure7.png"
+                 alt="Qualitative results scene 3: nine predicted trajectories over the urgency-comfort grid with the conditioning passenger requests"
+                 loading="lazy"
+                 style="max-width: 100%; height: auto; display: block; margin-left: auto; margin-right: auto;">
+          </figure>
+          <p class="subtitle has-text-centered" style="margin-top: 0.75rem;">
+            <b>Figure 7.</b> Qualitative results (scene 3).
+          </p>
+
+        </div>
+      </div>
+      <!-- End Results -->
+
+      <!-- BibTeX -->
+      <div class="content" id="BibTeX" style="margin-top: 4rem;">
+        <div class="bibtex-header">
+          <h2 class="title is-3">BibTeX</h2>
+          <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+            <i class="fas fa-copy"></i>
+            <span class="copy-text">Copy</span>
+          </button>
+        </div>
+
+        <pre id="bibtex-code"><code>@misc{lee2026personadrivecontrollabletrajectoryprediction,
+      title={PersonaDrive: Controllable Trajectory Prediction with Multi-Dimensional Driving Personas}, 
+      author={Chan Lee and Kimin Yun and Yuseok Bae and Seong Tae Kim and Jung Uk Kim},
+      year={2026},
+      eprint={2608.15230},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2608.15230}, 
+}</code></pre>
+      </div>
+
+    </div>
+  </section>
+  <!-- End Method + Results + BibTeX -->
+
+</main>
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  </body>
+  </html>
