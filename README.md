@@ -78,11 +78,17 @@ You can download this checkpoint at [Checkpoint](https://drive.google.com/file/d
 Our codes benefits from the excellent [NAVSIM](https://github.com/autonomousvision/navsim), [Transfuser](https://github.com/autonomousvision/transfuser), [Diffusion Policy](https://github.com/real-stanford/diffusion_policy), [MapTR](https://github.com/hustvl/MapTR), [VAD](https://github.com/hustvl/VAD), [SparseDrive](https://github.com/swc-17/SparseDrive), [DiffusionDrive](https://github.com/hustvl/DiffusionDrive).
 
 
-<!-- ## Citation
+## Citation
 If you use PersonaDrive, please consider citing:
 
 ```bibtex
-
+@misc{lee2026personadrivecontrollabletrajectoryprediction,
+      title={PersonaDrive: Controllable Trajectory Prediction with Multi-Dimensional Driving Personas}, 
+      author={Chan Lee and Kimin Yun and Yuseok Bae and Seong Tae Kim and Jung Uk Kim},
+      year={2026},
+      eprint={2608.15230},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2608.15230}, 
 }
 ```
-     -->
