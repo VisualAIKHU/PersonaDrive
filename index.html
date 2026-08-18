@@ -276,10 +276,8 @@
                  style="max-width: 90%; height: auto; display: block; margin-left: auto; margin-right: auto;">
           </figure>
           <p class="subtitle has-text-centered" style="margin-top: 0.75rem;">
-            <b>Figure 1.</b> Motivation. (a) Existing planners take no persona input and produce a single behavior.
-            (b) One-dimensional persona methods cover only a single urgency spectrum. (c) PersonaDrive conditions on a
-            multi-dimensional persona that combines Temporal Urgency and Ride Comfort into a 3&times;3 grid, generating
-            distinct, controllable trajectories from the same scene.
+            <b>Figure 1.</b> Unlike planners with no persona input (a) or a single urgency axis (b), PersonaDrive (c)
+            controls trajectories over a 3&times;3 grid of Temporal Urgency and Ride Comfort.
           </p>
         </div>
       </div>
@@ -308,11 +306,8 @@
                  style="max-width: 100%; height: auto; display: block; margin-left: auto; margin-right: auto;">
           </figure>
           <p class="subtitle has-text-centered" style="margin-top: 0.75rem;">
-            <b>Figure 2.</b> Dataset generation pipeline. Stage 1 generates candidate trajectory and text pairs with
-            GPT-4o-mini voting. Stage 2 applies rule-based validation covering dynamic bounds, lane compliance,
-            progress ordering, and pairwise diversity. Stage 3 uses GPT-4o as an LLM judge for persona identification
-            and quality scoring. Stage 4 regenerates failed samples by injecting the failure reason into the prompt,
-            with up to three retries.
+            <b>Figure 2.</b> Four-stage dataset generation pipeline: candidate generation, rule-based validation,
+            LLM-as-a-Judge scoring, and failure-aware regeneration.
           </p>
 
           <figure class="image" style="margin-top: 2.5rem;">
@@ -322,9 +317,8 @@
                  style="max-width: 90%; height: auto; display: block; margin-left: auto; margin-right: auto;">
           </figure>
           <p class="subtitle has-text-centered" style="margin-top: 0.75rem;">
-            <b>Figure 3.</b> Dataset statistics. (a) Along the urgency axis, speed and travel distance grow with
-            urgency level. (b) Along the comfort axis, jerk and yaw rate shrink as comfort increases. The two axes
-            control complementary, well-separated aspects of the trajectories.
+            <b>Figure 3.</b> Dataset statistics. Urgency governs speed and travel distance (a), while comfort governs
+            jerk and yaw rate (b).
           </p>
         </div>
       </div>
@@ -354,10 +348,7 @@
                  style="max-width: 100%; height: auto; display: block; margin-left: auto; margin-right: auto;">
           </figure>
           <p class="subtitle has-text-centered" style="margin-top: 0.75rem;">
-            <b>Figure 4.</b> Overall architecture. A frozen text encoder embeds the persona request. PCAT modulates
-            the anchor bank with an urgency scalar &alpha;<sub>u</sub> and a comfort vector &alpha;<sub>c</sub> under
-            the Hierarchical Guide Loss. PCMF fuses persona, visible, and ego-status features, and the decoder is
-            trained with the Axis-Decomposed Diversity Loss (&#x1D43F;<sub>AD</sub>) over the 3&times;3 persona grid.
+            <b>Figure 4.</b> Overall architecture of PersonaDrive, built on PCAT anchor modulation and PCMF fusion.
           </p>
         </div>
       </div>
@@ -383,8 +374,7 @@
                  style="max-width: 90%; height: auto; display: block; margin-left: auto; margin-right: auto;">
           </figure>
           <p class="subtitle has-text-centered" style="margin-top: 0.75rem;">
-            <b>Table 1.</b> Main results on the NAVSIM <i>navtest</i> split, averaged across all nine persona
-            categories. PersonaDrive achieves the best ADE, FDE, and PDMS among all baselines.
+            <b>Table 1.</b> Main results on the NAVSIM <i>navtest</i> split, averaged over the nine personas.
           </p>
 
           <!-- Ablation table -->
@@ -395,9 +385,8 @@
                  style="max-width: 75%; height: auto; display: block; margin-left: auto; margin-right: auto;">
           </figure>
           <p class="subtitle has-text-centered" style="margin-top: 0.75rem;">
-            <b>Table 2.</b> Ablation study. PCAT, PCMF, and the Axis-Decomposed Diversity Loss
-            (&#x1D43F;<sub>AD</sub>) each contribute, and the full model performs best, improving ADE from 3.93 to
-            2.39 and PDMS from 55.3 to 57.7 over the baseline.
+            <b>Table 2.</b> Ablation study on PCAT, PCMF, and the Axis-Decomposed Diversity Loss
+            (&#x1D43F;<sub>AD</sub>).
           </p>
 
           <!-- Qualitative results -->
